@@ -10,4 +10,4 @@
 # cd ~/web-server
 
 # Run the docker-compose.yml file
-docker-compose up --force-recreate --build -d
+docker compose up --force-recreate --build -d
