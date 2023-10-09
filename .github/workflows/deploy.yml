@@ -17,4 +17,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            rm -rf yusufcirak.net-nginx && git clone https://github.com/yusuf-cirak/yusufcirak.net-nginx.git && cd yusufcirak.net-nginx && git checkout main && git pull && bash start.sh
+            cd home && rm -rf yusufcirak.net-nginx && git clone https://github.com/yusuf-cirak/yusufcirak.net-nginx.git && cd yusufcirak.net-nginx && git checkout main && git pull && bash start.sh
