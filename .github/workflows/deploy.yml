@@ -5,15 +5,16 @@ on:
       - main
 jobs:
   release:
-    concurrency: 
+    concurrency:
       group: ${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy Web Server Configuration
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: 
+      - name: Deploy Web Server Configuration
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            git clone https://github.com/yusuf-cirak/yusufcirak.net-nginx && cd yusufcirak.net-nginx && bash start.sh
