@@ -8,8 +8,10 @@ services:
     restart: unless-stopped
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl/nginx-selfsigned.crt:/etc/ssl/certs/nginx-selfsigned.crt:ro
-      - ./nginx/ssl/nginx-selfsigned.key:/etc/ssl/private/nginx-selfsigned.key:ro
+      - ./nginx/ssl/yusufciraknet/nginx-selfsigned.crt:/etc/ssl/yusufciraknet/certs/nginx-selfsigned.crt:ro
+      - ./nginx/ssl/yusufciraknet/nginx-selfsigned.key:/etc/ssl/yusufciraknet/private/nginx-selfsigned.key:ro
+      - ./nginx/ssl/tumeraltunbascom/nginx-selfsigned.crt:/etc/ssl/tumeraltunbascom/certs/nginx-selfsigned.crt
+      - ./nginx/ssl/tumeraltunbascom/nginx-selfsigned.key:/etc/ssl/tumeraltunbascom/private/nginx-selfsigned.key
     ports:
       - 443:443
       - 443:443/udp
@@ -18,4 +20,7 @@ services:
 
 networks:
   chat-app:
+    external: true
+
+  tumeraltunbascom:
     external: true
