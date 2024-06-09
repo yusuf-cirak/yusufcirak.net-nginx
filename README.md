@@ -1,1 +1,2 @@
 # yusufcirak.net-nginx
+.
