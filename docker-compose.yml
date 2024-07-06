@@ -17,7 +17,7 @@ services:
     networks:
       - chat-app
       - tumeraltunbascom
-      - portfolio
+      - website
       - streaming-app
 
 networks:
@@ -27,7 +27,7 @@ networks:
   tumeraltunbascom:
     external: true
 
-  portfolio:
+  website:
     external: true
 
   streaming-app:
