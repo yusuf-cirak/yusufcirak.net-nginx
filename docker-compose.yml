@@ -34,3 +34,6 @@ networks:
 
   streaming-app:
     external: true
+
+  discord:
+    external: true
