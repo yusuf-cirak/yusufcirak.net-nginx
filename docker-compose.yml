@@ -21,7 +21,8 @@ services:
       - website
       - streaming-app
       - discord
-
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
 networks:
   chat-app:
     external: true
