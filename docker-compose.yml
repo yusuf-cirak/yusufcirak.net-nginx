@@ -21,6 +21,7 @@ services:
       - website
       - streaming-app
       - discord
+      - coolify
 
 networks:
   chat-app:
@@ -36,4 +37,7 @@ networks:
     external: true
 
   discord:
+    external: true
+
+  coolify:
     external: true
