@@ -22,6 +22,8 @@ services:
       - streaming-app
       - discord
       - coolify
+      - n8n
+      - beszel
 
 networks:
   chat-app:
@@ -40,4 +42,10 @@ networks:
     external: true
 
   coolify:
+    external: true
+
+  n8n:
+    external: true
+
+  beszel:
     external: true
