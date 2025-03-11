@@ -24,6 +24,7 @@ services:
       # - coolify
       - n8n
       - beszel
+      - nginx-ui
 
 networks:
   chat-app:
@@ -48,4 +49,7 @@ networks:
     external: true
 
   beszel:
+    external: true
+
+  nginx-ui:
     external: true
