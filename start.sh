@@ -4,6 +4,8 @@ mkdir -p ../web-server
 cp ./beszel/docker-compose.yml ../web-server/beszel-docker-compose.yml
 cp ./docker-compose.yml ../web-server/docker-compose.yml
 
+cp ./nginx ../web-server/nginx -r
+
 # change directory to web-server
 cd ../web-server
 echo "Starting Beszel Hub..."
