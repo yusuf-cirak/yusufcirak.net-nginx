@@ -21,8 +21,6 @@ services:
       - website
       - streaming-app
       - discord
-      # - coolify
-      - n8n
       - beszel-network
 
 networks:
