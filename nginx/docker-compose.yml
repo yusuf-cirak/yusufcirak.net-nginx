@@ -38,11 +38,5 @@ networks:
   discord:
     external: true
 
-  # coolify:
-  #   external: true
-
-  n8n:
-    external: true
-
   beszel-network:
     external: true
