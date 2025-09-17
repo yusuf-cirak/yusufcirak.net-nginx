@@ -23,6 +23,7 @@ services:
       - discord
       # - coolify
       - n8n
+      - beszel-network
 
 networks:
   chat-app:
@@ -41,4 +42,7 @@ networks:
   #   external: true
 
   n8n:
+    external: true
+
+  beszel-network:
     external: true
