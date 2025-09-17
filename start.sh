@@ -1,13 +1,9 @@
 # First run Beszel Hub
-if ! docker ps --format '{{.Names}}' | grep -q '^beszel$'; then
-  docker compose -f ./beszel/docker-compose.yml up -d
-  echo "Beszel is up and running."
-else
-  echo "Beszel is already running."
-fi
+echo "Starting Beszel Hub..."
+docker compose -f ./beszel-hub/docker-compose.yml up -d
 
 # Run the nginx server
-docker compose up --force-recreate --build -d
+docker compose -f ./docker-compose.yml up --force-recreate --build -d
 
 echo "Web server is up and running."
 
