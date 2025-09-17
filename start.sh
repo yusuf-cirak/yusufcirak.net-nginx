@@ -1,8 +1,8 @@
 mkdir -p ../web-server
 
 # copy beszel compose file to web-server directory
-cp ./beszel/docker-compose.yml ../web-server/beszel-docker-compose.yml
-cp ./docker-compose.yml ../web-server/docker-compose.yml
+cp ./beszel/docker-compose.yml ../web-server/beszel/docker-compose.yml
+cp ./nginx/docker-compose.yml ../web-server/docker-compose.yml
 
 cp ./nginx ../web-server/nginx -r
 
@@ -11,10 +11,12 @@ cd ../web-server
 echo "Starting Beszel Hub..."
 
 # First run Beszel Hub
-docker compose -f beszel-docker-compose.yml up -d
+docker compose -f beszel/docker-compose.yml up -d
 
 # Run the nginx server
-docker compose up --force-recreate --build -d
+echo "Starting Nginx server..."
+cd nginx
+docker compose up --build --force-recreate -d
 
 echo "Web server is up and running."
 

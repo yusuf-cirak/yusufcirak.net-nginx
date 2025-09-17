@@ -6,12 +6,12 @@ services:
     image: tiangolo/nginx-rtmp
     restart: unless-stopped
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl/yusufciraknet/nginx-selfsigned.crt:/etc/ssl/yusufciraknet/certs/nginx-selfsigned.crt:ro
-      - ./nginx/ssl/yusufciraknet/nginx-selfsigned.key:/etc/ssl/yusufciraknet/private/nginx-selfsigned.key:ro
-      - ./nginx/ssl/tumeraltunbascom/nginx-selfsigned.crt:/etc/ssl/tumeraltunbascom/certs/nginx-selfsigned.crt:ro
-      - ./nginx/ssl/tumeraltunbascom/nginx-selfsigned.key:/etc/ssl/tumeraltunbascom/private/nginx-selfsigned.key:ro
-      - ./nginx/auth/.htpasswd:/etc/auth/.htpasswd:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl/yusufciraknet/nginx-selfsigned.crt:/etc/ssl/yusufciraknet/certs/nginx-selfsigned.crt:ro
+      - ./ssl/yusufciraknet/nginx-selfsigned.key:/etc/ssl/yusufciraknet/private/nginx-selfsigned.key:ro
+      - ./ssl/tumeraltunbascom/nginx-selfsigned.crt:/etc/ssl/tumeraltunbascom/certs/nginx-selfsigned.crt:ro
+      - ./ssl/tumeraltunbascom/nginx-selfsigned.key:/etc/ssl/tumeraltunbascom/private/nginx-selfsigned.key:ro
+      - ./auth/.htpasswd:/etc/auth/.htpasswd:ro
     ports:
       - 443:443
       - 443:443/udp
