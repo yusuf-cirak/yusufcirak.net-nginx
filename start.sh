@@ -1,5 +1,5 @@
 # First run Beszel Hub
-docker compose -f ./beszel/docker-compose.yml up -d
+sudo docker compose -f ./beszel/docker-compose.yml up -d
 echo "Beszel is up and running."
 
 
