@@ -18,19 +18,14 @@ services:
       - 1935:1935
     networks:
       - chat-app
-      - tumeraltunbascom
       - website
       - streaming-app
       - discord
       # - coolify
       - n8n
-      - beszel
 
 networks:
   chat-app:
-    external: true
-
-  tumeraltunbascom:
     external: true
 
   website:
@@ -46,7 +41,4 @@ networks:
   #   external: true
 
   n8n:
-    external: true
-
-  beszel:
     external: true

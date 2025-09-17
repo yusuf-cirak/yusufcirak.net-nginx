@@ -1,0 +1,21 @@
+# @format
+
+name: beszel-compose
+
+services:
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    hostname: beszel
+    restart: unless-stopped
+    ports:
+      - 8090:8090
+    volumes:
+      - ./beszel_data:/beszel_data
+      - ./beszel_socket:/beszel_socket
+    networks:
+      - beszel-network
+networks:
+  beszel-network:
+    name: beszel-network
+    driver: bridge
