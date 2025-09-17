@@ -1,6 +1,9 @@
 mkdir -p ../web-server
 
 # copy beszel compose file to web-server directory
+rm -rf ../web-server/beszel
+rm -rf ../web-server/nginx
+
 cp ./beszel ../web-server/beszel -r
 cp ./nginx ../web-server/nginx -r
 

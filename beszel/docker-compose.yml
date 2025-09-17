@@ -11,8 +11,8 @@ services:
     ports:
       - 8090:8090
     volumes:
-      - ./beszel_data:/beszel_data
-      - ./beszel_socket:/beszel_socket
+      - ./beszel_volume/data:/beszel_data
+      - ./beszel_volume/socket:/beszel_socket
     networks:
       - beszel-network
 networks:
