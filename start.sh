@@ -1,9 +1,7 @@
 mkdir -p ../web-server
 
 # copy beszel compose file to web-server directory
-cp ./beszel/docker-compose.yml ../web-server/beszel/docker-compose.yml
-cp ./nginx/docker-compose.yml ../web-server/docker-compose.yml
-
+cp ./beszel ../web-server/beszel -r
 cp ./nginx ../web-server/nginx -r
 
 # change directory to web-server
