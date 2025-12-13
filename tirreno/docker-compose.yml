@@ -5,8 +5,6 @@ name: tirreno-compose
 services:
   tirreno:
     image: tirreno/tirreno:latest
-    container_name: tirreno
-    hostname: tirreno
     restart: unless-stopped
     ports:
       - 8585:80
