@@ -4,7 +4,7 @@ name: tirenno-compose
 
 services:
   tirenno:
-    image: henrygd/tirenno:latest
+    image: tirenno/tirenno:latest
     container_name: tirenno
     hostname: tirenno
     restart: unless-stopped
