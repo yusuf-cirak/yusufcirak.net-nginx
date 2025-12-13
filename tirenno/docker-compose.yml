@@ -1,24 +1,24 @@
 # @format
 
-name: tirenno-compose
+name: tirreno-compose
 
 services:
-  tirenno:
-    image: tirenno/tirenno:latest
-    container_name: tirenno
-    hostname: tirenno
+  tirreno:
+    image: tirreno/tirreno:latest
+    container_name: tirreno
+    hostname: tirreno
     restart: unless-stopped
     ports:
       - 8585:80
     volumes:
-      - tirenno_volume:/var/www/html
+      - tirreno_volume:/var/www/html
     networks:
-      - tirenno-network
+      - tirreno-network
 
 networks:
-  tirenno-network:
-    name: tirenno-network
+  tirreno-network:
+    name: tirreno-network
     driver: bridge
 
 volumes:
-  tirenno_volume:
+  tirreno_volume:
