@@ -22,6 +22,7 @@ services:
       - streaming-app
       - discord
       - beszel-network
+      - tirenno-network
 
 networks:
   chat-app:
@@ -37,4 +38,7 @@ networks:
     external: true
 
   beszel-network:
+    external: true
+
+  tirenno-network:
     external: true
