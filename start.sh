@@ -17,6 +17,7 @@ echo "Starting Beszel Hub..."
 docker compose -f beszel/docker-compose.yml up -d
 
 # Run the tirreno server
+echo "Starting Tirreno server..."
 docker compose -f tirreno/docker-compose.yml up -d
 
 # Run the nginx server
