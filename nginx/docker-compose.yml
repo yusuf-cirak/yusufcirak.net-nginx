@@ -23,6 +23,7 @@ services:
       - discord
       - beszel-network
       - tirreno-network
+      - coolify
 
 networks:
   chat-app:
@@ -41,4 +42,7 @@ networks:
     external: true
 
   tirreno-network:
+    external: true
+
+  coolify:
     external: true
