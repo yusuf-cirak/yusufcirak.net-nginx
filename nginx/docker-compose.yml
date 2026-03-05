@@ -46,3 +46,6 @@ networks:
 
   coolify:
     external: true
+
+  signoz-net:
+    external: true
