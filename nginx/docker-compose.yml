@@ -24,6 +24,7 @@ services:
       - beszel-network
       - tirreno-network
       - coolify
+      - signoz-net
 
 networks:
   chat-app:
