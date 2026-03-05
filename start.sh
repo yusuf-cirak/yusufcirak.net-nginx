@@ -29,7 +29,7 @@ docker compose -f signoz/docker-compose.yaml up -d --remove-orphans
 # Run the nginx server
 echo "Starting Nginx server..."
 cd nginx
-# docker compose up --build --force-recreate -d
+docker compose up --build --force-recreate -d
 
 echo "Web server is up and running."
 
