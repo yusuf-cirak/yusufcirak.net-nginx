@@ -11,7 +11,7 @@ services:
       - ./ssl/yusufciraknet/nginx-selfsigned.key:/etc/ssl/yusufciraknet/private/nginx-selfsigned.key:ro
       - ./ssl/tumeraltunbascom/nginx-selfsigned.crt:/etc/ssl/tumeraltunbascom/certs/nginx-selfsigned.crt:ro
       - ./ssl/tumeraltunbascom/nginx-selfsigned.key:/etc/ssl/tumeraltunbascom/private/nginx-selfsigned.key:ro
-      - ./auth/.htpasswd:/etc/auth/.htpasswd:ro
+      - ./auth/.htpasswd:/etc/nginx/auth/.htpasswd:ro
     ports:
       - 443:443
       - 443:443/udp
