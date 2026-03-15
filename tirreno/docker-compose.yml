@@ -13,10 +13,14 @@ services:
       - tirreno_volume:/var/www/html
     networks:
       - tirreno-network
+      - streaming-app
 
 networks:
   tirreno-network:
     name: tirreno-network
+    driver: bridge
+  streaming-app:
+    name: streaming-app
     driver: bridge
 
 volumes:
