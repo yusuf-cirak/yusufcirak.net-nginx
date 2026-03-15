@@ -16,16 +16,16 @@ cd ../web-server
 echo "Starting Beszel Hub..."
 
 # First run Beszel Hub
-docker compose -f beszel/docker-compose.yml up -d
+docker compose -f beszel/docker-compose.yml up --build --force-recreate -d
 
 # Run the tirreno server
 echo "Starting Tirreno server..."
-docker compose -f tirreno/docker-compose.yml up -d
+docker compose -f tirreno/docker-compose.yml up --build --force-recreate -d
 
 
 # Run the Signoz server
 echo "Starting Signoz server..."
-docker compose -f signoz/docker-compose.yaml up -d --remove-orphans
+docker compose -f signoz/docker-compose.yaml up --build --force-recreate -d --remove-orphans
 # Run the nginx server
 echo "Starting Nginx server..."
 cd nginx
