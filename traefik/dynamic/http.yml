@@ -96,6 +96,18 @@ http:
       rule: "Host(`coolify.yusufcirak.net`)"
       middlewares: [ratelimit, compress]
       service: coolify
+    # Coolify realtime (websocket) and terminal — per Coolify's
+    # custom-reverse-proxy docs: /app -> :6001, /terminal/ws -> :6002
+    coolify-realtime:
+      entryPoints: [websecure]
+      rule: "Host(`coolify.yusufcirak.net`) && PathPrefix(`/app`)"
+      middlewares: [ratelimit]
+      service: coolify-realtime
+    coolify-terminal:
+      entryPoints: [websecure]
+      rule: "Host(`coolify.yusufcirak.net`) && PathPrefix(`/terminal/ws`)"
+      middlewares: [ratelimit]
+      service: coolify-terminal
     beszel:
       entryPoints: [websecure]
       rule: "Host(`beszel.yusufcirak.net`)"
@@ -145,6 +157,14 @@ http:
       loadBalancer:
         servers:
           - url: "http://coolify:8080"
+    coolify-realtime:
+      loadBalancer:
+        servers:
+          - url: "http://coolify-realtime:6001"
+    coolify-terminal:
+      loadBalancer:
+        servers:
+          - url: "http://coolify-realtime:6002"
     beszel:
       loadBalancer:
         servers:
