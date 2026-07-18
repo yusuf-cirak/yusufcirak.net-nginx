@@ -1,0 +1,13 @@
+# Replaces the old nginx rtmp{} relay: publishers hit Traefik :1935,
+# raw TCP is piped to the streaming app's own nginx-rtmp container.
+tcp:
+  routers:
+    rtmp:
+      entryPoints: [rtmp]
+      rule: "HostSNI(`*`)" # mandatory catch-all for non-TLS TCP
+      service: rtmp
+  services:
+    rtmp:
+      loadBalancer:
+        servers:
+          - address: "streaming-app-nginx-rtmp:1935"

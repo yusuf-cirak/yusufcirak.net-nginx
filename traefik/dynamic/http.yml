@@ -1,0 +1,159 @@
+http:
+  middlewares:
+    # nginx: limit_req_zone "$http_cf_connecting_ip" rate=50r/s burst=50 nodelay
+    ratelimit:
+      rateLimit:
+        average: 50
+        period: 1s
+        burst: 50
+        sourceCriterion:
+          requestHeaderName: CF-Connecting-IP
+
+    # nginx: gzip on
+    compress:
+      compress: {}
+
+    # nginx /hls: CORS + Cache-Control no-cache; Traefik answers OPTIONS preflight itself
+    hls-cors:
+      headers:
+        accessControlAllowOriginList:
+          - "*"
+        accessControlAllowMethods:
+          - GET
+          - OPTIONS
+        accessControlExposeHeaders:
+          - Content-Length
+        accessControlMaxAge: 1728000
+        customResponseHeaders:
+          Cache-Control: "no-cache"
+
+    # nginx: auth_basic /watchdog
+    watchdog-auth:
+      basicAuth:
+        usersFile: /etc/traefik/auth/.htpasswd
+        realm: "Restricted Access"
+
+  routers:
+    # ---- stream.yusufcirak.net ----
+    stream-hls:
+      entryPoints: [websecure]
+      rule: "Host(`stream.yusufcirak.net`) && PathPrefix(`/hls`)"
+      middlewares: [ratelimit, hls-cors] # no compress on video segments
+      service: streaming-hls
+    stream-api:
+      entryPoints: [websecure]
+      rule: "Host(`stream.yusufcirak.net`) && PathPrefix(`/api`)"
+      middlewares: [ratelimit, compress]
+      service: streaming-backend
+    stream-ws:
+      entryPoints: [websecure]
+      rule: "Host(`stream.yusufcirak.net`) && PathPrefix(`/_stream`)"
+      middlewares: [ratelimit] # websocket upgrade is automatic
+      service: streaming-backend
+    stream-watchdog:
+      entryPoints: [websecure]
+      rule: "Host(`stream.yusufcirak.net`) && PathPrefix(`/watchdog`)"
+      middlewares: [ratelimit, watchdog-auth]
+      service: streaming-backend
+    stream-root:
+      entryPoints: [websecure]
+      rule: "Host(`stream.yusufcirak.net`)" # shorter rule = lower auto-priority; path routers win
+      middlewares: [ratelimit, compress]
+      service: streaming-frontend
+
+    # ---- yusufcirak.net ----
+    portfolio:
+      entryPoints: [websecure]
+      rule: "Host(`yusufcirak.net`)"
+      middlewares: [ratelimit, compress]
+      service: portfolio
+
+    # ---- chat.yusufcirak.net ----
+    chat-api:
+      entryPoints: [websecure]
+      rule: "Host(`chat.yusufcirak.net`) && PathPrefix(`/_api`)"
+      middlewares: [ratelimit, compress]
+      service: chat-backend
+    chat-ws:
+      entryPoints: [websecure]
+      rule: "Host(`chat.yusufcirak.net`) && PathPrefix(`/_chat`)"
+      middlewares: [ratelimit]
+      service: chat-backend
+    chat-root:
+      entryPoints: [websecure]
+      rule: "Host(`chat.yusufcirak.net`)"
+      middlewares: [ratelimit, compress]
+      service: chat-frontend
+
+    # ---- single-service vhosts ----
+    discord:
+      entryPoints: [websecure]
+      rule: "Host(`dc.yusufcirak.net`)"
+      middlewares: [ratelimit, compress]
+      service: discord
+    coolify:
+      entryPoints: [websecure]
+      rule: "Host(`coolify.yusufcirak.net`)"
+      middlewares: [ratelimit, compress]
+      service: coolify
+    beszel:
+      entryPoints: [websecure]
+      rule: "Host(`beszel.yusufcirak.net`)"
+      middlewares: [ratelimit, compress]
+      service: beszel
+    tirreno:
+      entryPoints: [websecure]
+      rule: "Host(`tirreno.yusufcirak.net`)"
+      middlewares: [ratelimit, compress]
+      service: tirreno
+    signoz:
+      entryPoints: [websecure]
+      rule: "Host(`signoz.yusufcirak.net`)"
+      middlewares: [ratelimit, compress]
+      service: signoz
+
+  services:
+    streaming-hls:
+      loadBalancer:
+        servers:
+          - url: "http://streaming-app-nginx-rtmp:80"
+    streaming-backend:
+      loadBalancer:
+        servers:
+          - url: "http://streaming-app-backend:8080"
+    streaming-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://streaming-app-frontend:80"
+    portfolio:
+      loadBalancer:
+        servers:
+          - url: "http://portfolio:80"
+    chat-backend:
+      loadBalancer:
+        servers:
+          - url: "http://backend:80"
+    chat-frontend:
+      loadBalancer:
+        servers:
+          - url: "http://frontend:80"
+    discord:
+      loadBalancer:
+        servers:
+          - url: "http://discord-clone-app:3000"
+    coolify:
+      loadBalancer:
+        servers:
+          - url: "http://coolify:8080"
+    beszel:
+      loadBalancer:
+        servers:
+          - url: "http://beszel:8090"
+    tirreno:
+      loadBalancer:
+        servers:
+          - url: "http://tirreno:80"
+    signoz:
+      loadBalancer:
+        servers:
+          - url: "http://signoz:8080"

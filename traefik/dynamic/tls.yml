@@ -1,0 +1,11 @@
+# Cloudflare Origin CA certificate (yusufcirak.net + *.yusufcirak.net, valid to 2038).
+# Only valid behind the Cloudflare proxy — all traffic flows through CF anyway.
+tls:
+  certificates:
+    - certFile: /etc/traefik/certs/origin.crt
+      keyFile: /etc/traefik/certs/origin.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/traefik/certs/origin.crt
+        keyFile: /etc/traefik/certs/origin.key

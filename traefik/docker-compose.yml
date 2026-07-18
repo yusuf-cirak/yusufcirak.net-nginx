@@ -1,0 +1,37 @@
+# @format
+name: web-server
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # HTTP/3
+      - "1935:1935" # RTMP passthrough
+    volumes:
+      - ./traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./dynamic:/etc/traefik/dynamic:ro
+      - ./auth/.htpasswd:/etc/traefik/auth/.htpasswd:ro
+      # Cloudflare Origin CA cert pair (*.yusufcirak.net + apex, valid to 2038)
+      - ./certs:/etc/traefik/certs:ro
+    networks:
+      - chat-app
+      - website
+      - streaming-app
+      - discord
+      - beszel-network
+      - tirreno-network
+      - coolify
+      - signoz-net
+
+networks:
+  chat-app: { external: true }
+  website: { external: true }
+  streaming-app: { external: true }
+  discord: { external: true }
+  beszel-network: { external: true }
+  tirreno-network: { external: true }
+  coolify: { external: true }
+  signoz-net: { external: true }
